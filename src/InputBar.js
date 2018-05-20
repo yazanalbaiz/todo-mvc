@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
 
 class InputBar extends Component {
+	constructor(props) {
+		super(props);
+        
+		this.state = {
+		    task: ''
+		};
+    }
+    
+    handleInput = task => {
+        this.setState({
+            task: task
+        })
+        console.log(task);
+    }
 
 	render() {
 		return (
-			<input placeholder='What needs to be done?' className='app-input'/>
+            <input 
+            value={this.state.task}
+            onChange={e => this.handleInput(e.target.value)}
+            placeholder='What needs to be done?' 
+            className='app-input'/>
 		);
 	}
 }
