@@ -31,6 +31,7 @@ class Task extends Component {
 Task.propTypes = {
 	tasks: PropTypes.array,
 	onDelete: PropTypes.func,
+	onCheck: PropTypes.func
 };
 
 export default Task;
