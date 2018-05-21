@@ -12,14 +12,16 @@ class App extends Component {
   }
   
   handleAdd = (task) => {
-    this.setState(prevState => {tasks: prevState.tasks.concat(task)})
+    this.setState(state => ({
+      tasks: state.tasks.concat(task)
+    }))
   }
 
 	render() {
 		return (
 			<div className='app-container'>
 				<Header />
-				<InputBar onAdd={this.}/>
+				<InputBar onAdd={(task) => this.handleAdd(task)}/>
 			</div>
 		);
 	}

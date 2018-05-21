@@ -5,20 +5,19 @@ class InputBar extends Component {
 		super(props);
     }
     
-    handleInput = task => {
-        this.setState({
-            task: task
-        })
-        console.log(task);
+    handleInput = e => {
+        e.preventDefault();
+        this.props.onAdd(e.target.task.value)
     }
 
 	render() {
 		return (
-            <input 
-            value={this.state.task}
-            onChange={e => this.handleInput(e.target.value)}
-            placeholder='What needs to be done?' 
-            className='app-input'/>
+            <form onSubmit={this.handleInput}>
+                <input 
+                name='task'
+                placeholder='What needs to be done?' 
+                className='app-input'/>
+            </form>
 		);
 	}
 }
