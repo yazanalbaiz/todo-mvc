@@ -17,12 +17,13 @@ class App extends Component {
   }
 
   handleAdd = (task) => {
-    let newTask = {'name': task};
+    let oldTasks = JSON.parse(localStorage.getItem('tasks'));
+    let newTask = {'id': oldTasks.length,'name': task};
     this.setState(state => ({
       tasks: state.tasks.concat(newTask)
     }));
     let newTasks = JSON.stringify(
-      JSON.parse(localStorage.getItem('tasks')).concat(newTask)
+      oldTasks.concat(newTask)
     );
     localStorage.setItem('tasks', newTasks);
   }
@@ -32,7 +33,7 @@ class App extends Component {
 			<div className='app-container'>
 				<Header />
         <InputBar onAdd={(task) => this.handleAdd(task)}/>
-        <Task tasks={this.state.tasks}/>
+        <Task tasks={this.state.tasks} onDelete={(id) => this.handleDelete(id)}/>
 			</div>
 		);
 	}
