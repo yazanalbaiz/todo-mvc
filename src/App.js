@@ -65,6 +65,14 @@ class App extends Component {
     return flag;
   }
 
+  clearCompleted = () => {
+    this.state.tasks.map(task => {
+      if (task.done) {
+        this.handleDelete(task.id);
+      }
+    })
+  }
+
 	render() {
 		return (
 			<div className='app-container'>
@@ -102,6 +110,7 @@ class App extends Component {
           )} />
           <Nav
             checkCompleted={() => this.isThereCompleted()}
+            clearCompleted={this.clearCompleted}
           />
 			</div>
 		);

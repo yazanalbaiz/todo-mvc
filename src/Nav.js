@@ -11,10 +11,12 @@ class Nav extends Component {
 						<li><Link to='/active'>Active</Link></li>
 						<li><Link to='/completed'>Completed</Link></li>
 					</ul>
-                </nav>
-                {this.props.checkCompleted() && (
-                    <li>Hello</li>
-                )}
+				</nav>
+				{this.props.checkCompleted() && (
+					<button onClick={this.props.clearCompleted}>
+                        Clear Completed
+					</button>
+				)}
 			</div>
 		);
 	}
