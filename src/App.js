@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import InputBar from './InputBar';
+import Task from './Task';
 import './App.css';
 
 class App extends Component {
@@ -21,7 +22,8 @@ class App extends Component {
 		return (
 			<div className='app-container'>
 				<Header />
-				<InputBar onAdd={(task) => this.handleAdd(task)}/>
+        <InputBar onAdd={(task) => this.handleAdd(task)}/>
+        <Task tasks={this.state.tasks}/>
 			</div>
 		);
 	}
