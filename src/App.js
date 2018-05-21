@@ -11,11 +11,20 @@ class App extends Component {
 			tasks: []
 		};
   }
-  
+
+  componentWillMount = () => {
+    this.setState({tasks: JSON.parse(localStorage.getItem('tasks'))});
+  }
+
   handleAdd = (task) => {
+    let newTask = {'name': task};
     this.setState(state => ({
-      tasks: state.tasks.concat(task)
-    }))
+      tasks: state.tasks.concat(newTask)
+    }));
+    let newTasks = JSON.stringify(
+      JSON.parse(localStorage.getItem('tasks')).concat(newTask)
+    );
+    localStorage.setItem('tasks', newTasks);
   }
 
 	render() {
