@@ -11,7 +11,7 @@ class Task extends Component {
 					<li 
 						className='task' 
 						key={index}
-					>{task.name}<span className='delete-btn'>&times;</span></li>
+					>{task.name}<span onClick={() => this.props.onDelete(task.id)} className='delete-btn'>&times;</span></li>
 				)}
 			</ol>
 		);
