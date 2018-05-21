@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import sortBy from 'sort-by';
 import Header from './Header';
 import InputBar from './InputBar';
 import Task from './Task';
@@ -16,31 +17,42 @@ class App extends Component {
     this.setState({tasks: JSON.parse(localStorage.getItem('tasks'))});
   }
 
-  handleAdd = task => {
+  handleAdd = (taskName, task) => {
     const oldTasks = JSON.parse(localStorage.getItem('tasks'));
-    const newTask = {'id': oldTasks.length, 'name': task, 'done': false};
+    const newTask = task || {
+      'id': oldTasks.length, 
+      'name': taskName, 
+      'done': false,
+      'class': 'task'
+    };
     console.log(newTask.id)
+    const newTasks = oldTasks.concat(newTask);
+    newTasks.sort(sortBy('id'));
     this.setState(state => ({
-      tasks: state.tasks.concat(newTask)
+      tasks: newTasks
     }));
-    const newTasks = JSON.stringify(
-      oldTasks.concat(newTask)
-    );
-    localStorage.setItem('tasks', newTasks);
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
   handleDelete = id => {
     const newTasks = this.state.tasks.filter(task => task.id !== id);
+    newTasks.sort(sortBy(id));
     this.setState({tasks: newTasks});
     localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
-  handleCheck = (e, task) => {
+  handleCheck = (e, oldTask) => {
+    this.handleDelete(oldTask.id);
+    let task = oldTask;
 		if (e.target.checked) {
-      task.done = true;;
+      task.done = true;
+      task.class = 'task-completed';
     } else {
       task.done = false;
+      task.class = 'task';
     }
+    console.log(task);
+    this.handleAdd(task.name, task);
 	}
 
 	render() {
