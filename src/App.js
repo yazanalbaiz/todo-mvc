@@ -18,7 +18,7 @@ class App extends Component {
 
   handleAdd = task => {
     const oldTasks = JSON.parse(localStorage.getItem('tasks'));
-    const newTask = {'id': oldTasks.length,'name': task};
+    const newTask = {'id': oldTasks.length, 'name': task, 'done': false};
     console.log(newTask.id)
     this.setState(state => ({
       tasks: state.tasks.concat(newTask)
