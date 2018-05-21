@@ -72,6 +72,26 @@ class App extends Component {
               onCheck={(e, task) => this.handleCheck(e, task)}
               />
           )} />
+          <Route
+          exact
+          path='/active'
+          render={() => (
+            <Task 
+              tasks={this.state.tasks.filter(task => task.class === 'task')} 
+              onDelete={id => this.handleDelete(id)}
+              onCheck={(e, task) => this.handleCheck(e, task)}
+              />
+          )} />
+          <Route
+          exact
+          path='/completed'
+          render={() => (
+            <Task 
+              tasks={this.state.tasks.filter(task => task.class === 'task-completed')} 
+              onDelete={id => this.handleDelete(id)}
+              onCheck={(e, task) => this.handleCheck(e, task)}
+              />
+          )} />
           <Nav/>
 			</div>
 		);
