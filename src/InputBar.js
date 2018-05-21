@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class InputBar extends Component {
-	constructor(props) {
-		super(props);
-    }
-    
     handleInput = e => {
         e.preventDefault();
         this.props.onAdd(e.target.task.value);
