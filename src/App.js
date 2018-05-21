@@ -4,6 +4,14 @@ import InputBar from './InputBar';
 import './App.css';
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			tasks: []
+		};
+	}
+
+
 	render() {
 		return (
 			<div className='app-container'>
