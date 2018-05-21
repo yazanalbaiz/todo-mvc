@@ -17,7 +17,8 @@ class InputBar extends Component {
                 <input 
                 name='task'
                 placeholder='What needs to be done?' 
-                className='app-input'/>
+                className='app-input'
+                autoComplete='off'/>
             </form>
 		);
 	}
