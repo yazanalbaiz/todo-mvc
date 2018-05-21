@@ -10,7 +10,7 @@ class Task extends Component {
 			<ol>
 				{this.props.tasks.map((task, index) => 
 					<li 
-						className='task' 
+						className={task.class} 
 						key={index}
 					>
 						<input 
