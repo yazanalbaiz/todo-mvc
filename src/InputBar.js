@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class InputBar extends Component {
 	constructor(props) {
@@ -20,6 +21,10 @@ class InputBar extends Component {
             </form>
 		);
 	}
+}
+
+InputBar.propTypes = {
+    onAdd: PropTypes.func.isRequired
 }
 
 export default InputBar;
