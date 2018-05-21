@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import './App.css';
 
 class Task extends Component {
-	
+	setIcon = task => {
+		if (task.done) {
+			return 'far fa-check-circle';
+		} else {
+			return 'far fa-circle';
+		}
+	}
 
 	render() {
 		return(
@@ -13,9 +19,10 @@ class Task extends Component {
 						className={task.class} 
 						key={index}
 					>
-						<input 
-							onChange={e => this.props.onCheck(e, task)}
-							type='checkbox' />
+						<i
+							className={this.setIcon(task)}
+							onClick={() => this.props.onCheck(task)}
+						></i>
 						<label>{task.name}</label>
 						<span 
 							onClick={() => this.props.onDelete(task.id)} 

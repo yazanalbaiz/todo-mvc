@@ -43,10 +43,10 @@ class App extends Component {
     localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
-  handleCheck = (e, oldTask) => {
+  handleCheck = (oldTask) => {
     this.handleDelete(oldTask.id);
     let task = oldTask;
-		if (e.target.checked) {
+		if (!oldTask.done) {
       task.done = true;
       task.class = 'task-completed';
     } else {
@@ -74,11 +74,6 @@ class App extends Component {
   }
 
 	render() {
-    /**
-     * TO-DO:
-     * - Fix checkbox by making it another element
-     * - Fix Check Completed Button
-     */
 		return (
 			<div className='app-container'>
 				<Header />
