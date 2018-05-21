@@ -35,12 +35,23 @@ class App extends Component {
     localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
+  handleCheck = (e, task) => {
+		if (e.target.checked) {
+      task.done = true;;
+    } else {
+      task.done = false;
+    }
+	}
+
 	render() {
 		return (
 			<div className='app-container'>
 				<Header />
         <InputBar onAdd={(task) => this.handleAdd(task)}/>
-        <Task tasks={this.state.tasks} onDelete={id => this.handleDelete(id)}/>
+        <Task 
+          tasks={this.state.tasks} 
+          onDelete={id => this.handleDelete(id)}
+          onCheck={(e, task) => this.handleCheck(e, task)}/>
 			</div>
 		);
 	}
