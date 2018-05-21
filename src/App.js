@@ -74,6 +74,11 @@ class App extends Component {
   }
 
 	render() {
+    /**
+     * TO-DO:
+     * - Fix checkbox by making it another element
+     * - Fix Check Completed Button
+     */
 		return (
 			<div className='app-container'>
 				<Header />

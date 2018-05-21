@@ -9,6 +9,10 @@ body {
   padding: 3%;
 }
 
+.checkbox {
+  float: left;
+}
+
 .task-completed label {
   text-decoration: line-through;
 }
@@ -26,7 +30,7 @@ body {
 }
 
 .delete-btn {
-  padding-left: 50%;
+  float: right;
   color: red;
   cursor: pointer;
 }
