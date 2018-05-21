@@ -11,7 +11,10 @@ class Nav extends Component {
 						<li><Link to='/active'>Active</Link></li>
 						<li><Link to='/completed'>Completed</Link></li>
 					</ul>
-				</nav>
+                </nav>
+                {this.props.checkCompleted() && (
+                    <li>Hello</li>
+                )}
 			</div>
 		);
 	}

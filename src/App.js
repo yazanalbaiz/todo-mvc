@@ -55,7 +55,15 @@ class App extends Component {
     }
     console.log(task);
     this.handleAdd(task.name, task);
-	}
+  }
+  
+  isThereCompleted = () => {
+    let flag = false;
+    this.state.tasks.map(task => {
+      if (task.done) flag = true;
+    });
+    return flag;
+  }
 
 	render() {
 		return (
@@ -92,7 +100,9 @@ class App extends Component {
               onCheck={(e, task) => this.handleCheck(e, task)}
               />
           )} />
-          <Nav/>
+          <Nav
+            checkCompleted={() => this.isThereCompleted()}
+          />
 			</div>
 		);
 	}
