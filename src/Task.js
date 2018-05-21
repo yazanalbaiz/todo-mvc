@@ -7,7 +7,7 @@ class Task extends Component {
 		return(
 			<ol>
 				{this.props.tasks.map((task, index) => 
-					<li className='task' key={index}>{task}</li>
+					<li className='task' key={index}>{task.name}</li>
 				)}
 			</ol>
 		);
