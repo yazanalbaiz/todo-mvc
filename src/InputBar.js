@@ -8,7 +8,8 @@ class InputBar extends Component {
     
     handleInput = e => {
         e.preventDefault();
-        this.props.onAdd(e.target.task.value)
+        this.props.onAdd(e.target.task.value);
+        e.target.task.value = '';
     }
 
 	render() {
