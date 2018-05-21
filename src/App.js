@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import sortBy from 'sort-by';
 import Header from './Header';
 import InputBar from './InputBar';
 import Task from './Task';
+import Nav from './Nav';
 import './App.css';
 
 class App extends Component {
@@ -60,10 +62,17 @@ class App extends Component {
 			<div className='app-container'>
 				<Header />
         <InputBar onAdd={(task) => this.handleAdd(task)}/>
-        <Task 
-          tasks={this.state.tasks} 
-          onDelete={id => this.handleDelete(id)}
-          onCheck={(e, task) => this.handleCheck(e, task)}/>
+        <Route
+          exact
+          path='/'
+          render={() => (
+            <Task 
+              tasks={this.state.tasks} 
+              onDelete={id => this.handleDelete(id)}
+              onCheck={(e, task) => this.handleCheck(e, task)}
+              />
+          )} />
+          <Nav/>
 			</div>
 		);
 	}
