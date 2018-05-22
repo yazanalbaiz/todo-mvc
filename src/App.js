@@ -109,7 +109,7 @@ class App extends Component {
               />
           )} />
           <Nav
-            itemsLeft={this.state.tasks.filter(task => task.done).length}
+            itemsLeft={this.state.tasks.filter(task => !task.done).length}
             checkCompleted={() => this.isThereCompleted()}
             clearCompleted={this.clearCompleted}
           />

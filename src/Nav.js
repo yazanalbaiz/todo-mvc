@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 
 class Nav extends Component {
 	render() {
+		const itemsLeft = this.props.itemsLeft;
 		return (
 			<div>
 				<nav className='nav'>
+					<div>
+						{itemsLeft === 1 ?
+							(<p>{itemsLeft} Item Left</p>)
+							: (<p>{itemsLeft} Items Left</p>)
+						}
+					</div>
 					<ul className='menu'>
 						<li className='menu-item'><Link to='/'>All</Link></li>
 						<li className='menu-item'><Link to='/active'>Active</Link></li>
