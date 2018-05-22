@@ -64,11 +64,9 @@ class App extends Component {
   }
 
   clearCompleted = () => {
-    this.state.tasks.map(task => {
-      if (task.done) {
-        this.handleDelete(task.id);
-      }
-    })
+    const tasks = this.state.tasks.filter(task => !task.done);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    this.setState({ tasks });
   }
 
   completeAll = () => {
