@@ -72,8 +72,13 @@ class App extends Component {
   }
 
   completeAll = () => {
-    const newTasks = this.state.tasks.map(task => {
-      if (!task.done){
+    let flag = false;
+    let newTasks = this.state.tasks.map(task => {
+      if (!task.done) flag = true;
+      return task;
+    });
+    newTasks = this.state.tasks.map(task => {
+      if(flag) {
         task.done = true;
         task.class = 'task-completed';
       } else {
