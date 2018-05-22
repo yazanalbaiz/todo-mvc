@@ -11,6 +11,7 @@ class InputBar extends Component {
 	render() {
 		return (
             <form onSubmit={this.handleInput}>
+                <i class="fas fa-angle-down"></i>
                 <input 
                 name='task'
                 placeholder='What needs to be done?' 
