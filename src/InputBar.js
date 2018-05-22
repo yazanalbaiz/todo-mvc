@@ -11,9 +11,11 @@ class InputBar extends Component {
 	render() {
 		return (
             <form onSubmit={this.handleInput}>
-                <i 
+                {this.props.numOfTasks > 0 && (
+                    <i 
                     onClick={this.props.onArrowClick}
                     className="fas fa-angle-down"></i>
+                )}
                 <input 
                 name='task'
                 placeholder='What needs to be done?' 

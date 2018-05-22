@@ -89,8 +89,9 @@ class App extends Component {
 	render() {
 		return (
 			<div className='app-container'>
-				<Header />
+        <Header />
         <InputBar 
+          numOfTasks={this.state.tasks.length}
           onArrowClick={() => this.completeAll()}
           onAdd={(task) => this.handleAdd(task)}/>
         <Route
