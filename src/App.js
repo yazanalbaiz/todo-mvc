@@ -25,7 +25,7 @@ class App extends Component {
       'id': oldTasks.length, 
       'name': taskName, 
       'done': false,
-      'class': 'task'
+      'className': 'task'
     };
     const newTasks = oldTasks.concat(newTask);
     newTasks.sort(sortBy('id'));
@@ -47,10 +47,10 @@ class App extends Component {
     let task = oldTask;
 		if (!oldTask.done) {
       task.done = true;
-      task.class = 'task-completed';
+      task.className = 'task-completed';
     } else {
       task.done = false;
-      task.class = 'task';
+      task.className = 'task';
     }
     this.handleAdd(task.name, task);
   }
@@ -80,10 +80,10 @@ class App extends Component {
     newTasks = this.state.tasks.map(task => {
       if(flag) {
         task.done = true;
-        task.class = 'task-completed';
+        task.className = 'task-completed';
       } else {
         task.done = false;
-        task.class = 'task';
+        task.className = 'task';
       }
       return task;
     });
@@ -114,7 +114,7 @@ class App extends Component {
           path='/active'
           render={() => (
             <Task 
-              tasks={this.state.tasks.filter(task => task.class === 'task')} 
+              tasks={this.state.tasks.filter(task => task.className === 'task')} 
               onDelete={id => this.handleDelete(id)}
               onCheck={(e, task) => this.handleCheck(e, task)}
               />
@@ -124,7 +124,7 @@ class App extends Component {
           path='/completed'
           render={() => (
             <Task 
-              tasks={this.state.tasks.filter(task => task.class === 'task-completed')} 
+              tasks={this.state.tasks.filter(task => task.className === 'task-completed')} 
               onDelete={id => this.handleDelete(id)}
               onCheck={(e, task) => this.handleCheck(e, task)}
               />
