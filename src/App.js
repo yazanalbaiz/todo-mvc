@@ -123,11 +123,13 @@ class App extends Component {
               onCheck={(e, task) => this.handleCheck(e, task)}
               />
           )} />
-          <Nav
-            itemsLeft={this.state.tasks.filter(task => !task.done).length || 0}
-            checkCompleted={() => this.isThereCompleted()}
-            clearCompleted={this.clearCompleted}
-          />
+          {this.state.tasks.length > 0 && (
+            <Nav
+              itemsLeft={this.state.tasks.filter(task => !task.done).length || 0}
+              checkCompleted={() => this.isThereCompleted()}
+              clearCompleted={this.clearCompleted}
+            />
+          )}
 			</div>
 		);
 	}
