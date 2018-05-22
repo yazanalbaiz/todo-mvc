@@ -27,7 +27,6 @@ class App extends Component {
       'done': false,
       'class': 'task'
     };
-    console.log(newTask.id)
     const newTasks = oldTasks.concat(newTask);
     newTasks.sort(sortBy('id'));
     this.setState(state => ({
@@ -53,7 +52,6 @@ class App extends Component {
       task.done = false;
       task.class = 'task';
     }
-    console.log(task);
     this.handleAdd(task.name, task);
   }
   
@@ -73,11 +71,28 @@ class App extends Component {
     })
   }
 
+  completeAll = () => {
+    const newTasks = this.state.tasks.map(task => {
+      if (!task.done){
+        task.done = true;
+        task.class = 'task-completed';
+      } else {
+        task.done = false;
+        task.class = 'task';
+      }
+      return task;
+    });
+    this.setState({tasks: newTasks});
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
+  }
+
 	render() {
 		return (
 			<div className='app-container'>
 				<Header />
-        <InputBar onAdd={(task) => this.handleAdd(task)}/>
+        <InputBar 
+          onArrowClick={() => this.completeAll()}
+          onAdd={(task) => this.handleAdd(task)}/>
         <Route
           exact
           path='/'
@@ -109,7 +124,7 @@ class App extends Component {
               />
           )} />
           <Nav
-            itemsLeft={this.state.tasks.filter(task => !task.done).length}
+            itemsLeft={this.state.tasks.filter(task => !task.done).length || 0}
             checkCompleted={() => this.isThereCompleted()}
             clearCompleted={this.clearCompleted}
           />
