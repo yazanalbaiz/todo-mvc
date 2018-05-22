@@ -3,14 +3,6 @@ import PropTypes from 'prop-types';
 import './App.css';
 
 class Task extends Component {
-	setIcon = task => {
-		if (task.done) {
-			return 'far fa-check-circle';
-		} else {
-			return 'far fa-circle';
-		}
-	}
-
 	render() {
 		return(
 			<ol>
@@ -20,7 +12,7 @@ class Task extends Component {
 						key={index}
 					>
 						<i
-							className={this.setIcon(task)}
+							className='far fa-circle'
 							onClick={() => this.props.onCheck(task)}
 						></i>
 						<label>{task.name}</label>
