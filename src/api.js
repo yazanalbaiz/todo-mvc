@@ -24,15 +24,15 @@ export const remove = (task) => (
 		.then(data => data.task)
 );
 
-export const add = (body) => (
-	fetch(`${endpoint}/tasks/${body.id}`, {
-		headers: {
-			'Content-type': 'application/json'
-		},
+export const create = (body) =>
+	fetch(`${endpoint}/tasks`, {
 		method: 'POST',
-		body: JSON.stringify(body),
-	}).then(res => res.json())
-);
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	}).then(res => res.json());
 
 export const update = (body) => (
 	fetch(`${endpoint}/tasks/${body.id}`,{
