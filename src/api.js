@@ -15,3 +15,9 @@ export const add = (body) => (
 		body: JSON.stringify(body),
 	}).then(res => res.json())
 );
+
+export const remove = (id) => (
+	fetch(`${endpoint}/tasks/${id}`, {
+		method: 'DELETE'
+	}).then(res => res.json())
+);
