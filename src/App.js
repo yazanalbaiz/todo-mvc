@@ -8,13 +8,6 @@ import Nav from './Nav';
 import * as api from './api';
 import './App.css';
 
-api.add({
-  id: 0,
-  name: 'JSON',
-  done: false,
-  className: 'task'
-}).then(res => {console.log(res);});
-
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -23,9 +16,9 @@ class App extends Component {
 		};
   }
 
-  componentWillMount = () => {
-    //this.setState({tasks: JSON.parse(localStorage.getItem('tasks'))});
-  }
+  // componentWillMount = () => {
+  //   this.setState({tasks: JSON.parse(localStorage.getItem('tasks'))});
+  // }
 
   componentDidMount = () => {
     api.getAll()
@@ -35,19 +28,24 @@ class App extends Component {
   }
 
   handleAdd = (taskName, task) => {
-    const oldTasks = JSON.parse(localStorage.getItem('tasks'));
+    // const oldTasks = JSON.parse(localStorage.getItem('tasks'));
     const newTask = task || {
-      'id': oldTasks.length, 
+      'id': this.state.tasks.length, 
       'name': taskName, 
       'done': false,
       'className': 'task'
     };
-    const newTasks = oldTasks.concat(newTask);
-    newTasks.sort(sortBy('id'));
-    this.setState(state => ({
-      tasks: newTasks
-    }));
-    localStorage.setItem('tasks', JSON.stringify(newTasks));
+    api.add(newTask)
+      .then(() => {
+        this.setState(prevState => ({tasks: prevState.tasks.concat(newTask)}));
+      })
+
+    // const newTasks = oldTasks.concat(newTask);
+    // newTasks.sort(sortBy('id'));
+    // this.setState(state => ({
+    //   tasks: newTasks
+    // }));
+    // localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
   handleDelete = id => {
