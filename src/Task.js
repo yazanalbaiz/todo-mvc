@@ -17,7 +17,7 @@ class Task extends Component {
 						></i>
 						<label>{task.name}</label>
 						<span 
-							onClick={() => this.props.onDelete(task.id)} 
+							onClick={() => this.props.onDelete(task)} 
 							className='delete-btn'
 						>&times;</span>
 					</li>
