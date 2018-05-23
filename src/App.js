@@ -5,6 +5,7 @@ import Header from './Header';
 import InputBar from './InputBar';
 import Task from './Task';
 import Nav from './Nav';
+//import * as api from './api';
 import './App.css';
 
 class App extends Component {
@@ -17,6 +18,13 @@ class App extends Component {
 
   componentWillMount = () => {
     this.setState({tasks: JSON.parse(localStorage.getItem('tasks'))});
+  }
+
+  componentDidMount = () => {
+    // api.getAll()
+    //   .then(tasks => {
+    //     //this.setState({tasks});
+    //   })
   }
 
   handleAdd = (taskName, task) => {
