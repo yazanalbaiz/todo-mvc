@@ -5,8 +5,15 @@ import Header from './Header';
 import InputBar from './InputBar';
 import Task from './Task';
 import Nav from './Nav';
-//import * as api from './api';
+import * as api from './api';
 import './App.css';
+
+api.add({
+  id: 0,
+  name: 'JSON',
+  done: false,
+  className: 'task'
+}).then(res => {console.log(res);});
 
 class App extends Component {
 	constructor(props) {
@@ -17,14 +24,14 @@ class App extends Component {
   }
 
   componentWillMount = () => {
-    this.setState({tasks: JSON.parse(localStorage.getItem('tasks'))});
+    //this.setState({tasks: JSON.parse(localStorage.getItem('tasks'))});
   }
 
   componentDidMount = () => {
-    // api.getAll()
-    //   .then(tasks => {
-    //     //this.setState({tasks});
-    //   })
+    api.getAll()
+      .then(tasks => {
+        this.setState({ tasks });
+      })
   }
 
   handleAdd = (taskName, task) => {
