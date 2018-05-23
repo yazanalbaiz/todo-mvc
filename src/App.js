@@ -23,7 +23,8 @@ class App extends Component {
   componentDidMount = () => {
     api.getAll()
       .then(tasks => {
-        this.setState({ tasks });
+        console.log(tasks);
+        this.setState({ tasks: tasks || []});
       })
   }
 
@@ -58,16 +59,26 @@ class App extends Component {
   }
 
   handleCheck = (oldTask) => {
-    this.handleDelete(oldTask.id);
-    let task = oldTask;
+    console.log(oldTask);
+    // this.handleDelete(oldTask.id);
+    let newTask = {...oldTask};
 		if (!oldTask.done) {
-      task.done = true;
-      task.className = 'task-completed';
+      newTask.done = true;
+      newTask.className = 'task-completed';
     } else {
-      task.done = false;
-      task.className = 'task';
+      newTask.done = false;
+      newTask.className = 'task';
     }
-    this.handleAdd(task.name, task);
+    const tasks = this.state.tasks.filter(task => ((
+      task.id === newTask.id ? newTask : task
+    )));
+    this.setState({ tasks: tasks });
+    api.update(newTask)
+      .then(res => {
+        console.log(res);
+      });
+      
+    // this.handleAdd(task.name, task);
   }
   
   isThereCompleted = () => {
