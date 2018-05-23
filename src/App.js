@@ -49,12 +49,18 @@ class App extends Component {
     // localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
-  handleDelete = id => {
-    api.remove(id).then(res => console.log(res));
+  handleDelete = task => {
+    api.remove(task).then(res => {
+      this.setState(prevState => (
+        {
+          tasks: prevState.tasks.filter(t => t.id !== res.id)
+        })
+      );
+    });
 
-    const newTasks = this.state.tasks.filter(task => task.id !== id);
-    newTasks.sort(sortBy(id));
-    this.setState({tasks: newTasks});
+    // const newTasks = this.state.tasks.filter(task => task.id !== id);
+    // newTasks.sort(sortBy(id));
+    // this.setState({tasks: newTasks});
     // localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
