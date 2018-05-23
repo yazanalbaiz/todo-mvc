@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import sortBy from 'sort-by';
+//import sortBy from 'sort-by';
 import Header from './Header';
 import InputBar from './InputBar';
 import Task from './Task';
@@ -36,10 +36,12 @@ class App extends Component {
       'done': false,
       'className': 'task'
     };
-    api.add(newTask)
-      .then(() => {
-        this.setState(prevState => ({tasks: prevState.tasks.concat(newTask)}));
-      })
+    api.create(newTask)
+      .then(res => {
+        this.setState(prevState => ({
+          tasks: prevState.tasks.concat(res)
+        }))
+      });
 
     // const newTasks = oldTasks.concat(newTask);
     // newTasks.sort(sortBy('id'));
@@ -65,7 +67,6 @@ class App extends Component {
   }
 
   handleCheck = (oldTask) => {
-    console.log(oldTask);
     // this.handleDelete(oldTask.id);
     let newTask = {...oldTask};
 		if (!oldTask.done) {
@@ -75,14 +76,19 @@ class App extends Component {
       newTask.done = false;
       newTask.className = 'task';
     }
-    const tasks = this.state.tasks.filter(task => ((
-      task.id === newTask.id ? newTask : task
-    )));
-    this.setState({ tasks: tasks });
-    api.update(newTask)
+    console.log(newTask)
+    api.checkOne(newTask)
       .then(res => {
-        console.log(res);
+        let tasks = this.state.tasks.filter(t => t.id !== res.id);
+        tasks = tasks.concat(newTask);
+        this.setState({ tasks });
       });
+
+    // const tasks = this.state.tasks.filter(task => ((
+    //   task.id === newTask.id ? newTask : task
+    // )));
+    // this.setState({ tasks: tasks });
+  
       
     // this.handleAdd(task.name, task);
   }

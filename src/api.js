@@ -34,12 +34,13 @@ export const create = (body) =>
 		body: JSON.stringify(body)
 	}).then(res => res.json());
 
-export const update = (body) => (
+export const checkOne = (body) => (
 	fetch(`${endpoint}/tasks/${body.id}`,{
 		headers: {
+			...headers,
 			'Content-type': 'application/json'
 		},
 		method: 'PUT',
-		body: body,
+		body: JSON.stringify(body),
 	}).then(res => res.json())
 );
