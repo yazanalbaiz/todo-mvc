@@ -16,6 +16,14 @@ export const getAll = () => (
 		.then(data => data.tasks)
 );
 
+export const remove = (task) => (
+	fetch(`${endpoint}/tasks/${task.id}`, {
+		method: 'DELETE',
+		headers
+	}).then(res => res.json())
+		.then(data => data.task)
+);
+
 export const add = (body) => (
 	fetch(`${endpoint}/tasks/${body.id}`, {
 		headers: {
@@ -23,12 +31,6 @@ export const add = (body) => (
 		},
 		method: 'POST',
 		body: JSON.stringify(body),
-	}).then(res => res.json())
-);
-
-export const remove = (id) => (
-	fetch(`${endpoint}/tasks/${id}`, {
-		method: 'DELETE'
 	}).then(res => res.json())
 );
 
