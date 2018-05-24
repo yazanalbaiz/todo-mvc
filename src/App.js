@@ -116,23 +116,27 @@ class App extends Component {
   }
 
   completeAll = () => {
-    let flag = false;
-    let newTasks = this.state.tasks.map(task => {
-      if (!task.done) flag = true;
-      return task;
-    });
-    newTasks = this.state.tasks.map(task => {
-      if(flag) {
-        task.done = true;
-        task.className = 'task-completed';
-      } else {
-        task.done = false;
-        task.className = 'task';
-      }
-      return task;
-    });
-    this.setState({tasks: newTasks});
-    localStorage.setItem('tasks', JSON.stringify(newTasks));
+    api.checkAll()
+      .then(tasks => {
+        this.setState({ tasks });
+      });
+    // let flag = false;
+    // let newTasks = this.state.tasks.map(task => {
+    //   if (!task.done) flag = true;
+    //   return task;
+    // });
+    // newTasks = this.state.tasks.map(task => {
+    //   if(flag) {
+    //     task.done = true;
+    //     task.className = 'task-completed';
+    //   } else {
+    //     task.done = false;
+    //     task.className = 'task';
+    //   }
+    //   return task;
+    // });
+    // this.setState({tasks: newTasks});
+    // localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
 	render() {
