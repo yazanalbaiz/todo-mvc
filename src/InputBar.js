@@ -27,6 +27,8 @@ class InputBar extends Component {
 }
 
 InputBar.propTypes = {
+    numOfTasks: PropTypes.number.isRequired,
+    onArrowClick: PropTypes.func.isRequired,
     onAdd: PropTypes.func.isRequired
 }
 

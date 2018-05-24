@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Nav extends Component {
 	render() {
@@ -27,6 +28,12 @@ class Nav extends Component {
 			</div>
 		);
 	}
+}
+
+Nav.propTypes = {
+	itemsLeft: PropTypes.number.isRequired,
+	checkCompleted: PropTypes.func.isRequired,
+	clearCompleted: PropTypes.func.isRequired
 }
 
 export default Nav;
