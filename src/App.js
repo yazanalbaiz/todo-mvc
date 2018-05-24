@@ -118,6 +118,7 @@ class App extends Component {
   completeAll = () => {
     api.checkAll()
       .then(tasks => {
+        tasks.sort(sortBy('id'));
         this.setState({ tasks });
       });
     // let flag = false;
