@@ -44,3 +44,11 @@ export const checkOne = (body) => (
 		body: JSON.stringify(body),
 	}).then(res => res.json())
 );
+
+export const clearDone = () => (
+	fetch(`${endpoint}/tasks`, {
+		method: 'DELETE',
+		headers
+	}).then(res => res.json())
+		.then(data => data)
+);
