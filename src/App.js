@@ -96,11 +96,10 @@ class App extends Component {
   }
   
   isThereCompleted = () => {
-    let flag = false;
-    this.state.tasks.map(task => {
-      if (task.done) flag = true;
+    this.state.tasks.forEach(task => {
+      if(task.done) return true;
     });
-    return flag;
+    return false;
   }
 
   clearCompleted = () => {
