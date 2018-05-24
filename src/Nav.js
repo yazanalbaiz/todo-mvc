@@ -19,7 +19,7 @@ class Nav extends Component {
 						<li className='menu-item'><Link to='/completed'>Completed</Link></li>
 						{this.props.checkCompleted() && (
 							<li className='menu-item' onClick={this.props.clearCompleted}>
-								<span>Clear Completed</span>
+								<button>Clear Completed</button>
 							</li>
 						)}
 					</ul>
