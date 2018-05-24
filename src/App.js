@@ -55,10 +55,11 @@ class App extends Component {
 
   handleDelete = task => {
     api.remove(task).then(res => {
-      this.setState(prevState => {
-        prevState.tasks.sort(sortBy('id'));
-        return {tasks: prevState.tasks.concat(res)};
-      });
+      this.setState(prevState => (
+        {
+          tasks: prevState.tasks.filter(t => t.id !== res.id)
+        }
+      ));
     });
 
     // const newTasks = this.state.tasks.filter(task => task.id !== id);
