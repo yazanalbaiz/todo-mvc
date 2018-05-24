@@ -97,16 +97,22 @@ class App extends Component {
   }
   
   isThereCompleted = () => {
+    let flag = false;
     this.state.tasks.forEach(task => {
-      if(task.done) return true;
+      if(task.done) flag = true;
     });
-    return false;
+    return flag;
   }
 
   clearCompleted = () => {
-    const tasks = this.state.tasks.filter(task => !task.done);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    this.setState({ tasks });
+    // const tasks = this.state.tasks.filter(task => !task.done);
+    // localStorage.setItem('tasks', JSON.stringify(tasks));
+    // this.setState({ tasks });
+    api.clearDone()
+      .then(tasks => {
+        tasks.sort(sortBy('id'));
+        this.setState({ tasks })
+      });
   }
 
   completeAll = () => {
