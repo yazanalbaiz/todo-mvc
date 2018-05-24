@@ -17,13 +17,14 @@ class Task extends Component {
 		let newForm = document.createElement('form');
 		let newInput = document.createElement('input');
 		
-		newForm.addEventListener('submit', (e) => {
+		newForm.addEventListener('submit', async (e) => {
 			e.preventDefault();
 			let newTask = {
 				...task,
 				name: e.target.newName.value
 			} 
-			this.props.onSubmit(newTask);
+			await this.props.onSubmit(newTask);
+			//Here add handling submit rerender
 		});
 
 		newInput.value = task.name;

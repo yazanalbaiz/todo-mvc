@@ -79,7 +79,7 @@ class App extends Component {
       newTask.className = 'task';
     }
     console.log(newTask)
-    api.checkOne(newTask)
+    api.update(newTask)
       .then(res => {
         let tasks = this.state.tasks.filter(t => t.id !== res.id);
         tasks = tasks.concat(newTask);
@@ -140,6 +140,16 @@ class App extends Component {
     // localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
+  handleEdit = (task) => {
+    api.update(task)
+    .then(res => {
+      let tasks = this.state.tasks.filter(t => t.id !== res.id);
+      tasks = tasks.concat(res);
+      tasks.sort(sortBy('id'));
+      this.setState({ tasks });
+    });
+  };
+
 	render() {
 		return (
 			<div className='app-container'>
@@ -156,6 +166,7 @@ class App extends Component {
               tasks={this.state.tasks} 
               onDelete={id => this.handleDelete(id)}
               onCheck={(e, task) => this.handleCheck(e, task)}
+              onSubmit={this.handleEdit}
               />
           )} />
           <Route
@@ -166,6 +177,7 @@ class App extends Component {
               tasks={this.state.tasks.filter(task => task.className === 'task')} 
               onDelete={id => this.handleDelete(id)}
               onCheck={(e, task) => this.handleCheck(e, task)}
+              onSubmit={this.handleEdit}
               />
           )} />
           <Route
@@ -176,6 +188,7 @@ class App extends Component {
               tasks={this.state.tasks.filter(task => task.className === 'task-completed')} 
               onDelete={id => this.handleDelete(id)}
               onCheck={(e, task) => this.handleCheck(e, task)}
+              onSubmit={this.handleEdit}
               />
           )} />
           {this.state.tasks.length > 0 && (
