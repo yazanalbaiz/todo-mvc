@@ -52,3 +52,11 @@ export const clearDone = () => (
 	}).then(res => res.json())
 		.then(data => data)
 );
+
+export const checkAll = () => (
+	fetch(`${endpoint}/tasks`, {
+		method: 'PUT',
+		headers
+	}).then(res => res.json())
+		.then(data => data)
+);
