@@ -10,11 +10,16 @@ class Task extends Component {
 	handleClick = (e, task) => {
 		let target;
 
-		if(e.target.className.includes('task')) {
+		if(e.target.tagName === 'LI') {
 			target = e.target;
-		} else {
+		} else if(e.target.tagName === 'FORM' 
+			|| e.target.tagName === 'LABEL'
+			|| e.target.tagName === 'SPAN'){
 			target = e.target.parentElement;
+		} else if(e.target.tagName === 'INPUT'){
+			target = e.target.parentElement.parentElement;
 		}
+		console.log(e.target);
 
 		target.classList.remove('task');
 		target.classList.add('task-editing');
