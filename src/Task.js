@@ -11,28 +11,32 @@ class Task extends Component {
 		} else {
 			target = e.target.parentElement;
 		}
-
-		target.innerHTML = '';
-
-		let newForm = document.createElement('form');
-		let newInput = document.createElement('input');
 		
-		newForm.addEventListener('submit', async (e) => {
-			e.preventDefault();
-			let newTask = {
-				...task,
-				name: e.target.newName.value
-			} 
-			await this.props.onSubmit(newTask);
-			//Here add handling submit rerender
-		});
+		target.classList.remove('task');
+		target.classList.add('task-editing');
 
-		newInput.value = task.name;
-		newInput.name = 'newName';
+		// target.innerHTML = '';
 
-		newForm.appendChild(newInput);
-		target.appendChild(newForm);
+		// let newForm = document.createElement('form');
+		// let newInput = document.createElement('input');
+		
+		// newForm.addEventListener('submit', async (e) => {
+		// 	e.preventDefault();
+		// 	let newTask = {
+		// 		...task,
+		// 		name: e.target.newName.value
+		// 	} 
+		// 	await this.props.onSubmit(newTask);
+		// 	//Here add handling submit rerender
+		// });
+
+		// newInput.value = task.name;
+		// newInput.name = 'newName';
+
+		// newForm.appendChild(newInput);
+		// target.appendChild(newForm);
 	}
+
 	render() {
 		return(
 			<ol>
@@ -47,6 +51,14 @@ class Task extends Component {
 							onClick={() => this.props.onCheck(task)}
 						></i>
 						<label>{task.name}</label>
+						<form
+							onSubmit={this.handleEdit}
+						>
+							<input
+								onChange={() => {}} 
+								name='editTask' 
+								value={task.name}></input>
+						</form>
 						<span 
 							onClick={() => this.props.onDelete(task)} 
 							className='delete-btn'
