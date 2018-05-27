@@ -6,11 +6,15 @@ i {
   float: left;
 }
 
-.task, .task-completed {
+.task, .task-completed, .task-editing {
   list-style-type: none;
   border: 1px solid black;
   margin: 3% 0% 3% 0%;
   padding: 3%;
+}
+
+.task form, .task-completed form {
+  display: none;
 }
 
 .checkbox {
@@ -27,6 +31,14 @@ i {
   background-position: center;
   background-size: 0.5em;
   cursor: pointer;
+}
+
+.task-editing form{
+  display: inline;
+}
+
+.task-editing label{
+  display: none;
 }
 
 .menu-item button {
