@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import './App.css';
 
 class Task extends Component {
+	state = {
+		editingTask: ''
+	}
+
 	handleClick = (e, task) => {
 		let target;
 
@@ -11,30 +15,45 @@ class Task extends Component {
 		} else {
 			target = e.target.parentElement;
 		}
-		
+
 		target.classList.remove('task');
 		target.classList.add('task-editing');
 
-		// target.innerHTML = '';
+		this.setState({editingTask: task.name});
+		target.children[2].firstElementChild.focus()
+	}
 
-		// let newForm = document.createElement('form');
-		// let newInput = document.createElement('input');
+	handleEdit = async (e, task) => {
+		let listItem = e.target.parentElement;
 		
-		// newForm.addEventListener('submit', async (e) => {
-		// 	e.preventDefault();
-		// 	let newTask = {
-		// 		...task,
-		// 		name: e.target.newName.value
-		// 	} 
-		// 	await this.props.onSubmit(newTask);
-		// 	//Here add handling submit rerender
-		// });
+		e.preventDefault();
 
-		// newInput.value = task.name;
-		// newInput.name = 'newName';
+		let newTask = {
+			...task,
+			name: e.target.editTask.value
+		} 
+		await this.props.onSubmit(newTask);
 
-		// newForm.appendChild(newInput);
-		// target.appendChild(newForm);
+		listItem.classList.remove('task-editing');
+		listItem.classList.add('task');
+	}
+
+	handleBlur = async (e, task) => {
+		let listItem = e.target.parentElement.parentElement;
+
+		let newTask = {
+			...task,
+			name: e.target.value
+		} 
+
+		await this.props.onSubmit(newTask);
+
+		listItem.classList.remove('task-editing');
+		listItem.classList.add('task');
+	}
+
+	handleChange = (task) => {
+		this.setState({editingTask: task.trim()});
 	}
 
 	render() {
@@ -52,12 +71,13 @@ class Task extends Component {
 						></i>
 						<label>{task.name}</label>
 						<form
-							onSubmit={this.handleEdit}
+							onSubmit={(e)=>this.handleEdit(e, task)}
 						>
 							<input
-								onChange={() => {}} 
+								onBlur={(e)=>this.handleBlur(e, task)}
+								onChange={(e) => this.handleChange(e.target.value)} 
 								name='editTask' 
-								value={task.name}></input>
+								value={this.state.editingTask}></input>
 						</form>
 						<span 
 							onClick={() => this.props.onDelete(task)} 
